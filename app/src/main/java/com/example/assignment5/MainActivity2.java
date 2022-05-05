@@ -15,6 +15,13 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        
+        Intent intent = getIntent();
+        String cname= intent.getStringExtra("courses_name");
+
+        WebView view = (WebView) findViewById(R.id.webview);
+        view.getSettings().setJavaScriptEnabled(true);
+        view.setWebViewClient( new WebViewClient());
+        //view.loadUrl("http://www.lau.edu.lb");
+        view.loadUrl(cname);
     }
 }

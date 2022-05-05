@@ -18,9 +18,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView my_list;
-    ArrayList<String> the_list;
-    ArrayList<String> the_list2;
+    ListView mylist;
+    ArrayList<String> thelist;
+    ArrayList<String> thelist2;
     ArrayAdapter<String> adapter;
     String[] arr;
     String[] opt;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        my_list = (ListView) findViewById(R.id.myList);
+        mylist = (ListView) findViewById(R.id.myList);
         try{
 
             SQLiteDatabase sql = this.openOrCreateDatabase("finaldb", MODE_PRIVATE, null);
@@ -45,21 +45,21 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), course_name, Toast.LENGTH_LONG).show();
                 c.moveToNext();
             }
-            the_list = new ArrayList<String>(Arrays.asList(arr));
+            thelist = new ArrayList<String>(Arrays.asList(arr));
 
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, the_list);
-            my_list.setAdapter(adapter);
-            the_list = new ArrayList<String>(Arrays.asList(arr));
-            the_list2 = new ArrayList<String>(Arrays.asList(opt));
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, thelist);
+            mylist.setAdapter(adapter);
+            thelist = new ArrayList<String>(Arrays.asList(arr));
+            thelist2 = new ArrayList<String>(Arrays.asList(opt));
 
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,the_list2);
-            my_list.setAdapter(adapter);
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,thelist2);
+            mylist.setAdapter(adapter);
 
-            my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent obj = new Intent(getApplicationContext(), MainActivity2.class);
-                    obj.putExtra("coursee_name", ""+the_list.get(i));
+                    obj.putExtra("courses_name", ""+thelist.get(i));
                     startActivity(obj);
 
                 }
