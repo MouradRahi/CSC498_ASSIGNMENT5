@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,17 +34,24 @@ public class MainActivity extends AppCompatActivity {
 
             SQLiteDatabase sql = this.openOrCreateDatabase("finaldb", MODE_PRIVATE, null);
             sql.execSQL("CREATE Table IF NOT EXISTS finals (courses VARCHAR, web_url VARCHAR)");
-            sql.execSQL("INSERT INTO finals(courses, web_url) VALUES ('mobile computing', 'https://developer.android.com/docs')");
+            //sql.execSQL("INSERT INTO finals(courses, web_url) VALUES ('mobile computing', 'https://www.javatpoint.com/mobile-computing-interview-questions')");
 
             Cursor c = sql.rawQuery("Select * from finals", null);
             int coursesIndex = c.getColumnIndex("courses");
             int wurlIndex = c.getColumnIndex("web_url");
             c.moveToFirst();
-            while(c!= null){
+            int count = 0;
+            opt= new String[c.getCount()];
+            arr= new String[c.getCount()];
+            while(c!= null & c.getCount() >count){
                 String course_name = c.getString(coursesIndex) + " " + c.getString(wurlIndex);
-                arr= new String[c.getCount()];
+                Log.i("count", ""+count);
+                opt[count] = c.getString(coursesIndex);
+                arr[count] = c.getString(wurlIndex);
                 Toast.makeText(getApplicationContext(), course_name, Toast.LENGTH_LONG).show();
+
                 c.moveToNext();
+                count++;
             }
             thelist = new ArrayList<String>(Arrays.asList(arr));
 
